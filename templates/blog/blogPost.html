@@ -1,0 +1,704 @@
+{% extends 'base.html' %}
+
+{% block title %} blogPost {% endblock title %}
+
+{% block body %}
+
+{% load humanize %}
+{% load extras %}
+{% if post.content %}
+
+<!-- actual body  -->
+<div class="row" style="height: auto !important; margin-right: 10px; margin-left: 10px; margin-top: 10px;">
+    <div id="sidebar" style="height: auto !important;" itemscope="itemscope"
+        itemtype="http://schema.org/WPSideBar" style="height: auto !important;">
+        <div class="slidebar ty-trigger section" id="slidebar" style="height: auto !important;">
+            <div class="widget LinkList" data-version="1" id="LinkList1">
+                <h2 style="color: #556B2F; padding:5px;">
+             
+                </h2>
+                <div class="widget-content">
+                    <div >
+                        <form method="get" style="    margin-left: 0.5rem!important;" action="/search" class="form-inline my-2 my-lg-0 mx-3">
+                        <input class="form-control mr-sm-1" type="search" placeholder="Search Aqaeed Article" aria-label="Search" name="query"
+                            id="query">
+                        <button class="btn btn-outline-success my-2 mr-sm-1" type="submit">Search</button>
+                        </form>
+                        </div>
+        
+                    <ul style="color: green;">
+        
+                    
+                        <li><a href="/">
+                                <p style=" color: green;">
+                                    <p style=" color: green;">HOME</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/blog" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">BLOGS</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/#topic" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">TOPICS</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/archive" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">ARCHIVE</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/about" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">ABOUT</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/contact" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">Contact US</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/books" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">BOOKS CORNER</p>
+                                </p>
+                            </a></li>
+                            {% if not user.is_authenticated %}
+                            <li>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#signUPModal" style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                                <p>
+                                    <p style=" color: green;">SignUP</p>
+                                </p>
+                            </a>
+                            </li>
+                            {% endif %}
+                            {% if not user.is_authenticated %}
+                            <li>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#loginModal" style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                                <p>
+                                    <p style=" color: green;">LogIN</p>
+                                </p>
+                            </a>
+                            </li>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            <li>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                                <p>
+                                    <p style=" color: green;">LogOUT</p>
+                                </p>
+                            </a>
+                            </li>
+                            {% endif %}
+                            <div>
+                                <a style="color: green; padding-left: 10px; padding-right: 20px;"
+                                    href="https://www.facebook.com/SunniHanfiOrganisationMumbai/"><i
+                                        class="fab fa-facebook-square fa-2x"></i></a>
+                                <a style="color: green; padding-left: 10px; padding-right: 20px;"
+                                    href="mailto: imran.shaikh16230@gmail.com" title="email"><i class="fas fa-envelope fa-2x"></i></a>
+                                <a style="color:green; padding-left: 10px;padding-right:20px;"
+                                    href="https://www.youtube.com/user/786SHO/videos" title="youtube"><i
+                                        class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+
+                            
+
+                            
+                    </ul>
+                    <div class="clear"></div>
+                    <span class="widget-item-control">
+                        <span class="item-control blog-admin">
+
+                        </span>
+                    </span>
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div style="display: flex;">
+                    <!-- social_share -->
+            <div class="col col-lg-2" style="margin-top: 15px;">
+                <div class="container">
+                    {% load social_share %}
+                    <div class="action" onclick="actionToggle();">
+                        <span>Share</span>
+                        <ul>
+                            <li><a><i class="fab fa-whatsapp"></i>{% post_to_whatsapp object_or_url "Share on WhatsApp!" %}</a>
+                            </li>
+                            <li><a><i
+                                        class="fab fa-facebook-square"></i>{% post_to_facebook object_or_url "Share on Facebook!" %}</a>
+                            </li>
+                            <li><a><i
+                                        class="fab fa-twitter"></i>{% post_to_twitter "New Article: {{object.title}}. Check it out!" object_or_url "Share on Twitter!" %}</a>
+                            </li>
+                            <li><a><i
+                                        class="fas fa-envelope"></i>{% send_email object.title "New Article: {{post.title}}. Check it out!" object_or_url "Share on Email!" %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <script type="text/javascript">
+                        function actionToggle() {
+                            var action = document.querySelector('.action');
+                            action.classList.toggle('active')
+                        }
+                    </script>
+
+                    <style>
+                        .action {
+                            /* position: fixed; */
+                            bottom: 50px;
+                            left: 50px;
+                            width: 50px;
+                            height: 50px;
+                            background: rgb(142, 218, 129);
+                            color: #006400;
+                            border-radius: 100%;
+                            cursor: pointer;
+                            font-family: cursive;
+                            box-shadow: 0 10px 5px #006400;
+                        }
+
+                        .action span {
+                            /* position: absolute; */
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: #006400;
+                            font-size: 1em;
+                            transition: 0.3s ease-in-out;
+                        }
+
+                        .action:active span {
+                            transform: rotate(90deg);
+
+                        }
+
+                        .action ul {
+                            position: inherit;
+                            /* bottom: 90px; */
+                            background: rgb(142, 218, 129);
+                            min-width: 200px;
+                            border-radius: 30px;
+                            opacity: 0.8;
+                            visibility: hidden;
+                            padding-inline-start: 10px;
+                            transition: 0.3s;
+                            margin-top: 15px;
+                        }
+
+                        /* .action ul li {
+                            color: solid green;
+                        } */
+
+                        .action.active ul {
+                            bottom: 65px;
+                            opacity: 1;
+                            visibility: visible;
+                            transition: 0.3s;
+
+                        }
+
+                        .action.active ul li {
+                            list-style: none;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 10px 0;
+                            transition: 0.3s;
+                            color: #006400;
+
+                        }
+
+                        .action.active ul li:hover {
+                            font-weight: 650;
+                        }
+
+                        .action ul li:not(:last-child) {
+                            border-bottom: 1px solid green;
+                        }
+
+                        .action ul li a {
+                            margin-right: 15px;
+                            opacity: 0.8;
+                            transform: scale(1);
+                            color: solid green;
+                        }
+
+                        .action ul li a:hover {
+                            opacity: 0.2;
+                        }
+                    </style>
+                </div>
+            </div>
+            <div id="rollbar" class="col col-lg-2" style="margin-top: 15px; z-index: 1;">
+                <div class="container">
+                    <div class="actionon">
+                        <div id="spanMenu">
+                            <span style="padding-top:8px;">Menu</span>
+                        </div>
+                    </div>
+                    <div class="actionoff">
+                        <div id="spanMenuoff">
+                            <span style="padding-top:8px;">Menu</span>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $('.actionoff').hide();
+                        $(document).ready(function () {
+                            $("#spanMenu").click(function () {
+                                $('#slidebar').show();
+                                $('.actionon').hide();
+                                $('.actionoff').show();
+
+
+                            });
+                        });
+                        $(document).ready(function () {
+                            $("#spanMenuoff").click(function () {
+                                $('#slidebar').hide();
+                                $('.actionon').show();
+                                $('.actionoff').hide();
+
+                            });
+                        });
+
+                    </script>
+
+                    <style>
+                        .actionon {
+                            /* position: fixed; */
+                            bottom: 50px;
+                            left: 50px;
+                            width: 50px;
+                            height: 50px;
+                            background: rgb(142, 218, 129);
+                            color: #006400;
+                            border-radius: 100%;
+                            cursor: pointer;
+                            font-family: cursive;
+                            box-shadow: 0 10px 5px #006400;
+                        }
+
+                        .actionon span {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: #006400;
+                            font-size: 1.2em;
+                            transition: 0.3s ease-in-out;
+                        }
+
+                        .actionon:active span {
+                            transform: rotate(75deg);
+
+                        }
+                        .actionoff {
+                            /* position: fixed; */
+                            bottom: 50px;
+                            left: 50px;
+                            width: 50px;
+                            height: 50px;
+                            background: rgb(142, 218, 129);
+                            color: #006400;
+                            border-radius: 100%;
+                            cursor: pointer;
+                            font-family: cursive;
+                            box-shadow: 0 10px 5px #006400;
+                        }
+
+                        .actionoff span {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: #006400;
+                            font-size: 1.2em;
+                            transition: 0.3s ease-in-out;
+                        }
+
+                        .actionoff:active span {
+                            transform: rotate(75deg);
+
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="clear:both"></div>
+       
+    </div>
+    <!-- content heading  -->
+    <div style=" height: auto !important; " id="wrapper">
+        <h2 class="blog-post-title" id="main-ow">{{post.title}}</h2>
+        <p class="blog-post-meta"><span style="color: #808080;">{{post.timeStamp}}</span> <a
+                href="/about">{{post.author}}</a> <span style="color: #556B2F;"> Views: {{post.views}} </span>
+        </p>
+
+        <!-- actual content  -->
+        <div style="padding-top: 10px;padding-bottom: 10px;" id="actual">
+            <p> {{post.content | safe }}</p>
+        </div>
+        
+
+        <!-- comments section  -->
+        <div class="container" id='comment'>
+            <h2 style="color: green;padding-top:20px">COMMENTS ({{comments.count}}):</h2>
+            {% if user.is_authenticated %}
+            <form action="/blog/postComment" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="postSno" value="{{post.sno}}">
+                <div class="form-group">
+                    <label for="comment" style="color:#556B2F;">Post Comment :</label>
+                    <input type="text" class="form-control" style="color:#556B2F;" name="comment"
+                        placeholder="enter comment here" id="commentForm">
+
+                </div>
+                <input type="hidden" name="postSno" value="{{post.sno}}">
+                <button type="submit" class="btn btn-sm btn-success">Submit</button>
+            </form>
+            {% else %}
+            <p style="font-style: italic; color: red;">Please login(through JOIN US{on navbar}) to post a comment!
+            </p>
+            {% endif %}
+
+            {% for comment in comments %}
+            <div class="row my-3 mx-0 ">
+                <div class="col-md-0" style="color:green; padding-left: 10px; padding-top: 10px;">
+                    <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+                </div>
+                <div class="col-md-11 mx-0" style="margin-bottom: 8px;">
+                    <b
+                        style="color: green; padding-right: 6px; font-weight: 900; font-style: italic; font-size: 25px; ">{{comment.user.username}}</b>
+                    <span class="badge badge-secondary"
+                        style="font-size: 14px; padding: 4px; color:white; background-color: green;">{{comment.timestamp| naturaltime}}</span>
+                    <div style="padding-top:2px; padding-bottom:6px">{{comment.comment}}</div>
+                    <div class="reply mx-0">
+                        {% if user.is_authenticated %}
+                        <p>
+                            <button class="btn btn-sm btn-success" type="button" data-toggle="collapse"
+                                data-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                                aria-controls="replyBox{{comment.sno}}">
+                                Reply
+                            </button>
+
+                        </p>
+
+
+                        <div class="collapse" id="replyBox{{comment.sno}}">
+                            <div class="card card-body my-2">
+                                <form action="/blog/postComment" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="postSno" value="{{post.sno}}">
+                                    <div class="form-group">
+                                        <label for="comment">Post a Reply :</label>
+                                        <input type="text" class="form-control" name="comment"
+                                            placeholder="enter comment here">
+                                        <input type="hidden" name="parentSno" value="{{comment.sno}}">
+                                    </div>
+                                    <input type="hidden" name="postSno" value="{{post.sno}}">
+                                    <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% else%}
+                        <p>
+                            <button class="btn btn-sm btn-success" type="button" data-toggle="collapse"
+                                data-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                                aria-controls="replyBox{{comment.sno}}" disabled>
+                                Login to Reply
+                            </button>
+
+                        </p>
+                        {% endif %}
+                        <div class="replies mx-2 mt-3">
+                            {% for reply in replyDict|get_val:comment.sno %}
+                            <div class="row">
+                                <div class="col-md-0 my-2" style="color: green; padding-left: 4px;">
+                                    <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-md-11" style="padding-top: 3px;">
+                                    <b
+                                        style="color: green; padding-right: 5px;font-weight: 900; font-style: italic; font-size:20px;">{{reply.user.username}}</b>
+                                    <span class="badge badge-secondary"
+                                        style="font-size: 13px; padding: 3px; color:white; background-color: green;">{{reply.timestamp| naturaltime}}</span>
+                                    <div style="padding-top: 3px; padding-bottom: 3px; color:#808080;">
+                                        {{reply.comment}}</div>
+                                </div>
+                            </div>
+
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+    <style>
+        @media only screen and (min-width: 1000px) {
+    
+            #wrapper,
+            #sidebar {
+                float: none;
+                clear: both;
+                margin: 0;
+            }
+        }
+    
+        @media only screen and (min-width: 1100px) {
+            #sidebar {
+                padding-top: 20px;
+                width: 30%;
+                float: right;
+                margin-bottom: 130px;
+                margin-right: 15px;
+            }
+        }
+    
+    
+        @media only screen and (min-width: 600px) and (max-width: 1090px) {
+    
+            #wrapper {
+                max-width: 1090px;
+            }
+        }
+    
+    
+        @media only screen and (min-width: 1200px) and (max-width: 1299px) {
+    
+            #wrapper {
+                max-width: 850px;
+            }
+        }
+    
+        @media only screen and (min-width: 1200px) and (max-width: 1299px) {
+            #sidebar {
+                max-width: 270px;
+    
+            }
+        }
+    
+        @media only screen and (min-width: 1300px) and (max-width: 1399px) {
+    
+            #wrapper {
+                max-width: 950px;
+            }
+        }
+    
+        @media only screen and (min-width: 1300px) and (max-width: 1399px) {
+            #sidebar {
+                max-width: 300px;
+    
+            }
+        }
+    
+        @media only screen and (min-width: 1400px) and (max-width: 1477px) {
+    
+            #wrapper{
+                max-width: 980px;
+            }
+        }
+    
+        @media only screen and (min-width: 1400px) and (max-width: 1477px) {
+            #sidebar {
+                max-width: 320px;
+    
+            }
+        }
+    
+        @media only screen and (min-width: 1480px) {
+    
+            #wrapper {
+                max-width: 1050px;
+            }
+        }
+    
+        @media only screen and (min-width: 1480px) {
+            #sidebar {
+                max-width: 330px;
+    
+            }
+        }
+    
+        @media only screen and (min-width: 1005px) {
+    
+            #wrapper {
+                /* max-width: 0%; */
+                padding: 0px;
+                width: 70%;
+                float: left;
+            }
+        }
+    
+        @media only screen and (min-width: 300px) and (max-width: 1023px) {
+            #sidebar {
+                /* padding-top: 5px; */
+                padding: 10px;
+            }
+        }
+    
+        @media only screen and (min-width: 1100px) {
+            #sidebar {
+                padding-top: 25px;
+                padding-right: 3px;
+                padding-left: 15px;
+                width: 30%;
+                float: right;
+                /* padding: 10px; */
+            }
+        }
+    
+        @media only screen and (min-width: 1100px) and (max-width: 1199px) {
+    
+            #wrapper {
+                max-width: 800px;
+            }
+        }
+    
+        @media only screen and (min-width: 1100px) and (max-width: 1199px) {
+            #sidebar {
+                max-width: 270px;
+    
+            }
+        }
+        @media only screen and (min-width: 400px) and (max-width: 1090px) {
+            #sidebar {
+                max-width: 330px;
+    
+            }
+        }
+    
+        @media only screen and (min-width: 250px) {
+            #LinkList1 {
+                border: 0.6px solid green;
+                border-radius: 3px;
+                background-color: rgb(193, 255, 182);
+            }
+        }
+    
+        @media only screen and (min-width: 1005px) {
+    
+            #wrapper {
+                /* max-width: 0%; */
+                padding: 0px;
+                width: 70%;
+                float: left;
+            }
+        }
+    
+        @media only screen and (min-width: 300px) {
+    
+            #wrapper {
+                /* max-width: 0%; */
+                padding: 5px;
+            }
+        }
+    
+        @media only screen and (min-width: 319px) and (max-width: 700px) {
+    
+            #wrapper {
+                width: 98%;
+    
+            }
+        }
+    
+        /* padding-right: 10px; padding-left: 50px; padding-top:25px */
+        @media only screen and (min-width: 300px) {
+            #wrapper {
+                width: 98%;
+            }
+        }
+    
+    
+        @media only screen and (min-width: 300px) and (max-width: 1000px) {
+            #sidebar {
+                padding-top: 0px;
+                /* width: 0%; */
+            }
+        }
+    
+    
+        #wrapper {
+            float: left;
+            /* max-width: 1000px; */
+        }
+    
+        *,
+        ::after,
+        ::before {
+            box-sizing: content-box;
+        }
+    </style>
+    
+</div>
+
+<style>
+    .row {
+        border: 0.5px solid green;
+        border-radius: 6px;
+        padding: 3px;
+        margin-bottom: 10px;
+    }
+    @media only screen and (min-width: 700px) {
+            #actual {
+                border: 0.5px solid green;
+                padding: 5px;
+                border-radius: 3px;
+                padding: 20px;
+                
+                
+            }
+        }
+        @media only screen and (min-width: 600px) {
+            #actual {
+                border: 0.5px solid green;
+                padding: 5px;
+                border-radius: 3px;
+                
+                
+            }
+        }
+        @media only screen and (min-width: 319px) {
+            #comment {
+                margin: 0px;
+                padding:0px;
+                
+            }
+        }
+        @media only screen and (min-width: 319px) {
+            #commentForm {
+                width: 94%;
+                
+            }
+        }
+        @media only screen and (min-width: 900px) {
+            #commentForm {
+                width: 96%;
+                
+            }
+        }
+        
+</style>
+
+{% endif %}
+
+{% endblock body %}

@@ -1,0 +1,471 @@
+{% extends 'base.html' %}
+
+{% block title %} books {% endblock title %}
+{% block body %}
+
+<div class="row" style="height: auto !important; margin-right: 10px; margin-left: 10px; margin-top: 10px;">
+    <div id="sidebar1" style="height: auto !important;" itemscope="itemscope"
+            itemtype="http://schema.org/WPSideBar" style="height: auto !important;">
+            <div class="slidebar ty-trigger section" id="slidebar" style="height: auto !important;">
+                
+            <div class="widget LinkList" data-version="1" id="LinkList1">
+                <h2 style="color: #556B2F; padding:5px;">
+             
+                </h2>
+                <div class="widget-content">
+                    <div >
+                        <form method="get" style="    margin-left: 0.5rem!important;" action="/search" class="form-inline my-2 my-lg-0 mx-3">
+                        <input class="form-control mr-sm-1" type="search" placeholder="Search Aqaeed Article" aria-label="Search" name="query"
+                            id="query">
+                        <button class="btn btn-outline-success my-2 mr-sm-1" type="submit">Search</button>
+                        </form>
+                        </div>
+        
+                    <ul style="color: green;">
+        
+                    
+                        <li><a href="/">
+                                <p style=" color: green;">
+                                    <p style=" color: green;">HOME</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/blog" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">BLOGS</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/#topic" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">TOPICS</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/archive" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">ARCHIVE</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/about" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">ABOUT</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/contact" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">Contact US</p>
+                                </p>
+                            </a></li>
+                            <li><a href="/books" style="color: green;">
+                                <p>
+                                    <p style=" color: green;">BOOKS CORNER</p>
+                                </p>
+                            </a></li>
+                            {% if not user.is_authenticated %}
+                            <li>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#signUPModal" style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                                <p>
+                                    <p style=" color: green;">SignUP</p>
+                                </p>
+                            </a>
+                            </li>
+                            {% endif %}
+                            {% if not user.is_authenticated %}
+                            <li>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#loginModal" style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                                <p>
+                                    <p style=" color: green;">LogIN</p>
+                                </p>
+                            </a>
+                            </li>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            <li>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                                <p>
+                                    <p style=" color: green;">LogOUT</p>
+                                </p>
+                            </a>
+                            </li>
+                            {% endif %}
+                            <div>
+                                <a style="color: green; padding-left: 10px; padding-right: 20px;"
+                                    href="https://www.facebook.com/SunniHanfiOrganisationMumbai/"><i
+                                        class="fab fa-facebook-square fa-2x"></i></a>
+                                <a style="color: green; padding-left: 10px; padding-right: 20px;"
+                                    href="mailto: imran.shaikh16230@gmail.com" title="email"><i class="fas fa-envelope fa-2x"></i></a>
+                                <a style="color:green; padding-left: 10px;padding-right:20px;"
+                                    href="https://www.youtube.com/user/786SHO/videos" title="youtube"><i
+                                        class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+
+                            
+
+                            
+                    </ul>
+                    <div class="clear"></div>
+                    <span class="widget-item-control">
+                        <span class="item-control blog-admin">
+
+                        </span>
+                    </span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+
+                </div>
+                <div id="rollbar" class="col col-lg-2" style="margin-top: 15px; z-index: 1;">
+                    <div class="container">
+                        <div class="actionon">
+                            <div id="spanMenu">
+                                <span style="padding-top:8px;">Menu</span>
+                            </div>
+                        </div>
+                        <div class="actionoff">
+                            <div id="spanMenuoff">
+                                <span style="padding-top:8px;">Menu</span>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $('.actionoff').hide();
+                            $(document).ready(function () {
+                                $("#spanMenu").click(function () {
+                                    $('#slidebar').show();
+                                    $('.actionon').hide();
+                                    $('.actionoff').show();
+        
+        
+                                });
+                            });
+                            $(document).ready(function () {
+                                $("#spanMenuoff").click(function () {
+                                    $('#slidebar').hide();
+                                    $('.actionon').show();
+                                    $('.actionoff').hide();
+        
+                                });
+                            });
+        
+                        </script>
+        
+                        <style>
+                            .actionon {
+                                /* position: fixed; */
+                                bottom: 50px;
+                                left: 50px;
+                                width: 50px;
+                                height: 50px;
+                                background: rgb(142, 218, 129);
+                                color: #006400;
+                                border-radius: 100%;
+                                cursor: pointer;
+                                font-family: cursive;
+                                box-shadow: 0 10px 5px #006400;
+                            }
+        
+                            .actionon span {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                color: #006400;
+                                font-size: 1.2em;
+                                transition: 0.3s ease-in-out;
+                            }
+        
+                            .actionon:active span {
+                                transform: rotate(75deg);
+        
+                            }
+                            .actionoff {
+                                /* position: fixed; */
+                                bottom: 50px;
+                                left: 50px;
+                                width: 50px;
+                                height: 50px;
+                                background: rgb(142, 218, 129);
+                                color: #006400;
+                                border-radius: 100%;
+                                cursor: pointer;
+                                font-family: cursive;
+                                box-shadow: 0 10px 5px #006400;
+                            }
+        
+                            .actionoff span {
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                color: #006400;
+                                font-size: 1.2em;
+                                transition: 0.3s ease-in-out;
+                            }
+        
+                            .actionoff:active span {
+                                transform: rotate(75deg);
+        
+                            }
+                        </style>
+                    </div>
+                </div>
+
+            </div>
+    <div>
+        <h2 style="color: green; padding-left: 10px; padding-top: 10px;">SUNNI HANFI ORGANISATION - BOOKS CORNER</h2>
+        <hr style="padding: 5px;">
+        {% for book in all_books %}
+        <div class="card mb-3" id="wrapper1" style="max-width: 700px;" style="background-color: rgb(193, 255, 182);">
+            <div class="row no-gutters" >
+              <div class="col-md-4">
+                <img src="/media/{{book.Image}}" class="card-img" alt="image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body" style="background-color: rgb(193, 255, 182);">
+                  <h5 class="card-title" style="color: #556B2F; margin-bottom: 5px;">{{book.BookTitle}}</h5>
+                  <p class="card-text"><small class="text-muted"> Author : {{book.Author}}</small></p>
+                  <p class="card-text">{{book.BookDescription|safe|truncatechars:300}}</p>
+                  <a href="/media/{{book.BookFile}}" class="btn btn-success">Download </a>
+
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <style>
+    
+        #abc {
+            color: rgb(17, 161, 218);
+            font-family: "Georgia";
+            font-style: italic;
+        }
+
+        #abc1 {
+            color: rgb(17, 161, 218);
+            font-family: "Georgia";
+            font-style: italic;
+        }
+
+        .img-fluid {
+            max-width: 110%;
+            height: 600px;
+        }
+    </style>
+
+
+<style>
+    @media only screen and (min-width: 1000px) {
+
+        #wrapper1,
+        #sidebar1 {
+            float: none;
+            clear: both;
+            margin: 0;
+        }
+    }
+
+    @media only screen and (min-width: 1100px) {
+        #sidebar1 {
+            padding-top: 20px;
+            width: 30%;
+            float: right;
+            margin-bottom: 130px;
+            margin-right: 20px;
+        }
+    }
+
+
+    @media only screen and (min-width: 600px) and (max-width: 1090px) {
+
+        #wrapper1 {
+            max-width: 1090px;
+        }
+    }
+
+
+    @media only screen and (min-width: 1200px) and (max-width: 1299px) {
+
+        #wrapper1 {
+            max-width: 850px;
+        }
+    }
+
+    @media only screen and (min-width: 1200px) and (max-width: 1299px) {
+        #sidebar1 {
+            max-width: 270px;
+
+        }
+    }
+
+    @media only screen and (min-width: 1300px) and (max-width: 1399px) {
+
+        #wrapper1 {
+            max-width: 950px;
+        }
+    }
+
+    @media only screen and (min-width: 1300px) and (max-width: 1399px) {
+        #sidebar1 {
+            max-width: 300px;
+
+        }
+    }
+
+    @media only screen and (min-width: 1400px) and (max-width: 1477px) {
+
+        #wrapper1 {
+            max-width: 980px;
+        }
+    }
+
+    @media only screen and (min-width: 1400px) and (max-width: 1477px) {
+        #sidebar1 {
+            max-width: 320px;
+
+        }
+    }
+
+    @media only screen and (min-width: 1480px) {
+
+        #wrapper1 {
+            max-width: 1050px;
+        }
+    }
+
+    @media only screen and (min-width: 1480px) {
+        #sidebar1 {
+            max-width: 330px;
+
+        }
+    }
+
+    @media only screen and (min-width: 1005px) {
+
+        #wrapper1 {
+            /* max-width: 0%; */
+            padding: 0px;
+            width: 70%;
+            float: left;
+        }
+    }
+
+    @media only screen and (min-width: 300px) and (max-width: 1023px) {
+        #sidebar1 {
+            /* padding-top: 5px; */
+            padding: 10px;
+        }
+    }
+
+    @media only screen and (min-width: 1100px) {
+        #sidebar1 {
+            padding-top: 25px;
+            padding-right: 3px;
+            padding-left: 15px;
+            width: 30%;
+            float: right;
+            /* padding: 10px; */
+        }
+    }
+
+    @media only screen and (min-width: 1100px) and (max-width: 1199px) {
+
+        #wrapper1 {
+            max-width: 800px;
+        }
+    }
+
+    @media only screen and (min-width: 1100px) and (max-width: 1199px) {
+        #sidebar1 {
+            max-width: 270px;
+
+        }
+    }
+    @media only screen and (min-width: 400px) and (max-width: 1090px) {
+        #sidebar1 {
+            max-width: 330px;
+
+        }
+    }
+
+    @media only screen and (min-width: 250px) {
+        #LinkList1 {
+            border: 0.6px solid green;
+            border-radius: 3px;
+            background-color: rgb(193, 255, 182);
+        }
+    }
+
+    @media only screen and (min-width: 1005px) {
+
+        #wrapper1 {
+            /* max-width: 0%; */
+            padding: 0px;
+            width: 70%;
+            float: left;
+        }
+    }
+
+    @media only screen and (min-width: 300px) {
+
+        #wrapper1 {
+            /* max-width: 0%; */
+            padding: 5px;
+        }
+    }
+
+    @media only screen and (min-width: 319px) and (max-width: 700px) {
+
+        #wrapper1 {
+            width: 98%;
+
+        }
+    }
+
+    /* padding-right: 10px; padding-left: 50px; padding-top:25px */
+    @media only screen and (min-width: 300px) {
+        #wrapper1 {
+            width: 98%;
+        }
+    }
+
+    @media only screen and (min-width: 300px) and (max-width: 1000px) {
+        #sidebar1 {
+            padding-top: 0px;
+            /* width: 0%; */
+        }
+    }
+
+
+    #wrapper1 {
+        float: left;
+        /* max-width: 1000px; */
+    }
+
+    *,
+    ::after,
+    ::before {
+        box-sizing: content-box;
+    }
+</style>
+
+
+<style>
+.no-gutters>.col, .no-gutters>
+[class*=col-] {
+    background-color: rgb(193, 255, 182);
+    border: 0px green ; 
+    outline-style: outset; 
+    outline-color: green; 
+}
+
+</style>
+
+
+</div>
+{% endblock body %}

@@ -1,0 +1,2208 @@
+{% extends 'base.html' %}
+
+{% block title %}Archive{% endblock title %}
+
+{% block body %}
+
+
+<div class="row" style="height: auto !important; margin-right: 10px; margin-left: 10px; margin-top: 10px;">
+
+
+  <div id="sidebar" style="height: auto !important;" itemscope="itemscope" itemtype="http://schema.org/WPSideBar"
+    style="height: auto !important;">
+    <div class="slidebar ty-trigger section" id="slidebar" style="height: auto !important;">
+      <div class="widget LinkList" data-version="1" id="LinkList1">
+        <h2 style="color: #556B2F; padding:5px;">
+
+        </h2>
+        <div class="widget-content">
+          <div>
+            <form method="get" style="    margin-left: 0.5rem!important;" action="/search"
+              class="form-inline my-2 my-lg-0 mx-3">
+              <input class="form-control mr-sm-1" type="search" placeholder="Search Aqaeed Article" aria-label="Search"
+                name="query" id="query">
+              <button class="btn btn-outline-success my-2 mr-sm-1" type="submit">Search</button>
+            </form>
+          </div>
+
+          <ul style="color: green;">
+
+
+            <li><a href="/">
+                <p style=" color: green;">
+                  <p style=" color: green;">HOME</p>
+                </p>
+              </a></li>
+            <li><a href="/blog" style="color: green;">
+                <p>
+                  <p style=" color: green;">BLOGS</p>
+                </p>
+              </a></li>
+            <li><a href="/#topic" style="color: green;">
+                <p>
+                  <p style=" color: green;">TOPICS</p>
+                </p>
+              </a></li>
+            <li><a href="/archive" style="color: green;">
+                <p>
+                  <p style=" color: green;">ARCHIVE</p>
+                </p>
+              </a></li>
+            <li><a href="/about" style="color: green;">
+                <p>
+                  <p style=" color: green;">ABOUT</p>
+                </p>
+              </a></li>
+            <li><a href="/contact" style="color: green;">
+                <p>
+                  <p style=" color: green;">Contact US</p>
+                </p>
+              </a></li>
+            <li><a href="/books" style="color: green;">
+                <p>
+                  <p style=" color: green;">BOOKS CORNER</p>
+                </p>
+              </a></li>
+            {% if not user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" data-toggle="modal" data-target="#signUPModal"
+                style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                <p>
+                  <p style=" color: green;">SignUP</p>
+                </p>
+              </a>
+            </li>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" data-toggle="modal" data-target="#loginModal"
+                style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                <p>
+                  <p style=" color: green;">LogIN</p>
+                </p>
+              </a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal"
+                style="color: green; width:70%; padding: 0px; cursor: pointer;">
+                <p>
+                  <p style=" color: green;">LogOUT</p>
+                </p>
+              </a>
+            </li>
+            {% endif %}
+            <div>
+              <a style="color: green; padding-left: 10px; padding-right: 20px;"
+                href="https://www.facebook.com/SunniHanfiOrganisationMumbai/"><i
+                  class="fab fa-facebook-square fa-2x"></i></a>
+              <a style="color: green; padding-left: 10px; padding-right: 20px;"
+                href="mailto: imran.shaikh16230@gmail.com" title="email"><i class="fas fa-envelope fa-2x"></i></a>
+              <a style="color:green; padding-left: 10px;padding-right:20px;"
+                href="https://www.youtube.com/user/786SHO/videos" title="youtube"><i class="fa fa-youtube-play fa-2x"
+                  aria-hidden="true"></i>
+              </a>
+            </div>
+
+
+
+
+
+          </ul>
+          <div class="clear"></div>
+          <span class="widget-item-control">
+            <span class="item-control blog-admin">
+
+            </span>
+          </span>
+          <div class="clear"></div>
+        </div>
+
+      </div>
+
+    </div>
+    <div id="rollbar" class="col col-lg-2" style="margin-top: 15px; z-index: 1;">
+      <div class="container">
+        <div class="actionon">
+          <div id="spanMenu">
+            <span style="padding-top:8px;">Menu</span>
+          </div>
+        </div>
+        <div class="actionoff">
+          <div id="spanMenuoff">
+            <span style="padding-top:8px;">Menu</span>
+          </div>
+        </div>
+        <script type="text/javascript">
+          $('.actionoff').hide();
+          $(document).ready(function () {
+            $("#spanMenu").click(function () {
+              $('#slidebar').show();
+              $('.actionon').hide();
+              $('.actionoff').show();
+
+
+            });
+          });
+          $(document).ready(function () {
+            $("#spanMenuoff").click(function () {
+              $('#slidebar').hide();
+              $('.actionon').show();
+              $('.actionoff').hide();
+
+            });
+          });
+
+        </script>
+
+        <style>
+          .actionon {
+            /* position: fixed; */
+            bottom: 50px;
+            left: 50px;
+            width: 50px;
+            height: 50px;
+            background: rgb(142, 218, 129);
+            color: #006400;
+            border-radius: 100%;
+            cursor: pointer;
+            font-family: cursive;
+            box-shadow: 0 10px 5px #006400;
+          }
+
+          .actionon span {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #006400;
+            font-size: 1.2em;
+            transition: 0.3s ease-in-out;
+          }
+
+          .actionon:active span {
+            transform: rotate(75deg);
+
+          }
+
+          .actionoff {
+            /* position: fixed; */
+            bottom: 50px;
+            left: 50px;
+            width: 50px;
+            height: 50px;
+            background: rgb(142, 218, 129);
+            color: #006400;
+            border-radius: 100%;
+            cursor: pointer;
+            font-family: cursive;
+            box-shadow: 0 10px 5px #006400;
+          }
+
+          .actionoff span {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #006400;
+            font-size: 1.2em;
+            transition: 0.3s ease-in-out;
+          }
+
+          .actionoff:active span {
+            transform: rotate(75deg);
+
+          }
+        </style>
+      </div>
+    </div>
+
+    <div style="clear:both"></div>
+  </div>
+  <div class="container" style=" margin-bottom: 200px;" id="wrapper">
+    <!-- <div class="col p-4 d-flex flex-column position-static"> -->
+    <div class="timeline">
+      <ul>
+        {% for year, allmonth in dic.items %}
+        <li>
+          <div class="content121" id="content{{year}}" >
+            {% for month in allmonth %}
+            <a style="color: green;" href="archive_page/{{year}}/{{month}}"><h3 id="{{month}}{{year}}">{{month}}</h3></a>
+            <p id="p{{month}}{{year}}">
+              
+            </p>
+            {% endfor %}
+          </div>
+          <div class="time121" id="time{{year}}">
+            <h4>{{year}}</h4>
+          </div>
+        </li>
+        {% endfor %}
+
+        <div style="clear: both;"></div>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- jquery for click  -->
+  <script>
+    $(document).ready(function () {
+
+
+      $('#time2014').click(function () {
+        $('#content2014').toggleClass('open');
+      })
+      $('#time2015').click(function () {
+        $('#content2015').toggleClass('open');
+      })
+      $('#time2016').click(function () {
+        $('#content2016').toggleClass('open');
+      })
+      $('#time2017').click(function () {
+        $('#content2017').toggleClass('open');
+      })
+      $('#time2018').click(function () {
+        $('#content2018').toggleClass('open');
+      })
+      $('#time2019').click(function () {
+        $('#content2019').toggleClass('open');
+      })
+      $('#time2020').click(function () {
+        $('#content2020').toggleClass('open');
+      })
+      $('#time2021').click(function () {
+        $('#content2021').toggleClass('open');
+      })
+      $('#time2022').click(function () {
+        $('#content2022').toggleClass('open');
+      })
+      $('#time2023').click(function () {
+        $('#content2023').toggleClass('open');
+      })
+      $('#time2024').click(function () {
+        $('#content2024').toggleClass('open');
+      })
+      $('#time2025').click(function () {
+        $('#content2025').toggleClass('open');
+      })
+      $('#time2026').click(function () {
+        $('#content2026').toggleClass('open');
+      })
+      $('#time2027').click(function () {
+        $('#content2027').toggleClass('open');
+      })
+
+
+      $('#DEC2014').click(function () {
+        $('#pDEC2014').toggleClass('open');
+      })
+      $('#JAN2015').click(function () {
+        $('#pJAN2015').toggleClass('open');
+      })
+      $('#FEB2015').click(function () {
+        $('#pFEB2015').toggleClass('open');
+      })
+      $('#MAR2015').click(function () {
+        $('#pMAR2015').toggleClass('open');
+      })
+      $('#APR2015').click(function () {
+        $('#pAPR2015').toggleClass('open');
+      })
+      $('#MAY2015').click(function () {
+        $('#pMAY2015').toggleClass('open');
+      })
+      $('#JUN2015').click(function () {
+        $('#pJUN2015').toggleClass('open');
+      })
+      $('#JUL2015').click(function () {
+        $('#pJUL2015').toggleClass('open');
+      })
+      $('#AUG2015').click(function () {
+        $('#pAUG2015').toggleClass('open');
+      })
+      $('#SEPT2015').click(function () {
+        $('#pSEPT2015').toggleClass('open');
+      })
+      $('#OCT2015').click(function () {
+        $('#pOCT2015').toggleClass('open');
+      })
+
+      $('#NOV2015').click(function () {
+        $('#pNOV2015').toggleClass('open');
+      })
+
+      $('#DEC15').click(function () {
+        $('#pDEC15').toggleClass('open');
+      })
+      $('#jan16').click(function () {
+        $('#pjan16').toggleClass('open');
+      })
+      $('#feb16').click(function () {
+        $('#pfeb16').toggleClass('open');
+      })
+      $('#mar16').click(function () {
+        $('#pmar16').toggleClass('open');
+      })
+      $('#may16').click(function () {
+        $('#pmay16').toggleClass('open');
+      })
+      $('#aug16').click(function () {
+        $('#paug16').toggleClass('open');
+      })
+      $('#sept16').click(function () {
+        $('#psept16').toggleClass('open');
+      })
+      $('#oct16').click(function () {
+        $('#poct16').toggleClass('open');
+      })
+      $('#feb17').click(function () {
+        $('#pfeb17').toggleClass('open');
+      })
+      $('#apr17').click(function () {
+        $('#papr17').toggleClass('open');
+      })
+      $('#may17').click(function () {
+        $('#pmay17').toggleClass('open');
+      })
+      $('#aug17').click(function () {
+        $('#paug17').toggleClass('open');
+      })
+      $('#sept17').click(function () {
+        $('#psept17').toggleClass('open');
+      })
+
+      $('#oct17').click(function () {
+        $('#poct17').toggleClass('open');
+      })
+      $('#nov17').click(function () {
+        $('#pnov17').toggleClass('open');
+      })
+
+      $('#jan18').click(function () {
+        $('#pjan18').toggleClass('open');
+      })
+      $('#jun18').click(function () {
+        $('#pjun18').toggleClass('open');
+      })
+      $('#jul18').click(function () {
+        $('#pjul18').toggleClass('open');
+      })
+      $('#mar19').click(function () {
+        $('#pmar19').toggleClass('open');
+      })
+      $('#apr19').click(function () {
+        $('#papr19').toggleClass('open');
+      })
+      $('#may19').click(function () {
+        $('#pmay19').toggleClass('open');
+      })
+      $('#jul19').click(function () {
+        $('#pjul19').toggleClass('open');
+      })
+      $('#aug19').click(function () {
+        $('#paug19').toggleClass('open');
+      })
+      $('#sept19').click(function () {
+        $('#sept19').toggleClass('open');
+      })
+      $('#nov19').click(function () {
+        $('#pnov19').toggleClass('open');
+      })
+      $('#dec19').click(function () {
+        $('#pdec19').toggleClass('open');
+      })
+      $('#jan20').click(function () {
+        $('#pjan20').toggleClass('open');
+      })
+      $('#mar20').click(function () {
+        $('#pmar20').toggleClass('open');
+      })
+      $('#apr20').click(function () {
+        $('#papr20').toggleClass('open');
+      })
+      $('#may20').click(function () {
+        $('#pmay20').toggleClass('open');
+      })
+      $('#jun20').click(function () {
+        $('#pjun20').toggleClass('open');
+      })
+
+
+
+
+    });
+
+
+  </script>
+  
+
+
+  <!-- months - click -->
+
+  <style>
+    #pDEC2014 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pDEC2014.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pJAN2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pJAN2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pFEB2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pFEB2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pMAR2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pMAR2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pAPR2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pAPR2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pMAY2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pMAY2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pJUN2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pJUN2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pJUL2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pJUL2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pAUG2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pAUG2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pSEPT2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pSEPT2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pOCT2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pOCT2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pnov15 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pnov15.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pdec15 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pdec15.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pjan16 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pjan16.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pfeb16 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pfeb16.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pmar16 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pmar16.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pmay16 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pmay16.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #paug16 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #paug16.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #psept16 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #psept16.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #poct16 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #poct16.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pfeb17 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pfeb17.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #papr17 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #papr17.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pmay17 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pmay17.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #paug17 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #paug17.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #psept17 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #psept17.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #poct17 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #poct17.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pnov17 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pnov17.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pjan18 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pjan18.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pjun18 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pjun18.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pjul18 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pjul18.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pmar19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pmar19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #papr19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #papr19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pmay19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pmay19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pjul19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pjul19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #paug19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #paug19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #psept19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #psept19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pnov19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pnov19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pdec19 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pdec19.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pjan20 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pjan20.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pmar20 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pmar20.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #papr20 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #papr20.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pmay20 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pmay20.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #pjun20 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #pjun20.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+  </style>
+
+  <!-- year -click  -->
+  <style>
+    #content2020 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2020.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2021 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2021.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2022 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2022.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2023 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2023.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2024 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2024.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2025 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2025.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2026 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2026.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2027 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2027.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2028 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2028.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2029 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2029.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+    #content2030 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2030.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #content2014 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2014.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #content2015 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2015.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #content2016 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2016.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #content2017 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2017.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #content2018 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2018.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    #content2019 {
+
+      overflow: hidden;
+      transition: max-height 300ms;
+      max-height: 0;
+      /* <---hide by default */
+      padding: 0
+    }
+
+    #content2019.open {
+      max-height: 100%;
+      /* <---when open, allow content to expand to take up as much height as it needs, up to e.g. 100px */
+    }
+
+    .time121 {
+      cursor: pointer;
+    }
+
+    .timeline ul li h3 {
+      cursor: pointer;
+    }
+  </style>
+
+  <!-- design of the timeline  -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    /* this is for whole timeline set of values i.e, body,line etc... */
+    .timeline {
+      position: relative;
+      margin: 50px auto;
+      /* auto for making it in middle and margin for above spacing*/
+      width: auto;
+      padding: 40px 0;
+      box-sizing: border-box;
+
+    }
+
+    /* this is for line */
+    .timeline:before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background: rgb(193, 255, 182);
+    }
+
+    .timeline ul {
+      margin: 0;
+      padding: 0;
+
+    }
+
+    .timeline ul li {
+      list-style: none;
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+
+    .timeline ul li:nth-child(odd) {
+      float: left;
+      text-align: right;
+      clear: both;
+    }
+
+    .timeline ul li:nth-child(even) {
+      float: right;
+      text-align: left;
+      clear: both;
+
+    }
+
+    .content121 {
+      padding-bottom: 20px;
+    }
+
+    .timeline ul li:nth-child(odd):before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      right: -7px;
+      width: 10px;
+      height: 10px;
+      background: green;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(91, 216, 107, 0.2);
+
+    }
+
+    .timeline ul li:nth-child(even):before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: -3px;
+      width: 10px;
+      height: 10px;
+      background: green;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(91, 216, 107, 0.2);
+
+
+    }
+
+    .timeline ul li h3 {
+      margin: 0;
+      padding-bottom: 20px;
+      font-weight: 550;
+      color: green;
+    }
+
+    .timeline ul li p {
+      margin: 10px 0 0;
+      padding: 0px;
+      padding-bottom: 20px;
+      /* font-weight: 550; */
+      color: black;
+    }
+
+    .timeline ul li .time121 h4 {
+      margin: 0px 0 0;
+      padding: 0px;
+      font-size: 20px;
+    }
+
+    .timeline ul li:nth-child(odd) .time121 {
+      position: absolute;
+      top: 12px;
+      right: -100px;
+      margin: 0;
+      padding: 8px 16px;
+      background-color: rgb(193, 255, 182);
+      color: green;
+      border-radius: 18px;
+      box-shadow: 0 0 0 3px rgba(91, 216, 107, 0.2);
+
+    }
+
+    .timeline ul li:nth-child(even) .time121 {
+      position: absolute;
+      top: 12px;
+      left: -100px;
+      margin: 0;
+      padding: 8px 16px;
+      background-color: rgb(193, 255, 182);
+      color: green;
+      border-radius: 18px;
+      box-shadow: 0 0 0 3px rgba(91, 216, 107, 0.2);
+
+    }
+  </style>
+
+  <!-- media - manupilation -->
+
+  <style>
+    @media only screen and (min-width: 1000px) {
+
+      #wrapper,
+      #sidebar {
+        float: none;
+        clear: both;
+        margin: 0;
+      }
+    }
+
+    @media only screen and (min-width: 1100px) {
+      #sidebar {
+        padding-top: 20px;
+        width: 30%;
+        float: right;
+      }
+    }
+
+
+    @media only screen and (min-width: 600px) and (max-width: 1090px) {
+
+      #wrapper {
+        max-width: 1090px;
+      }
+    }
+
+
+    @media only screen and (min-width: 1200px) and (max-width: 1299px) {
+
+      #wrapper {
+        max-width: 850px;
+      }
+    }
+
+    @media only screen and (min-width: 1200px) and (max-width: 1299px) {
+      #sidebar {
+        max-width: 270px;
+
+      }
+    }
+
+    @media only screen and (min-width: 1300px) and (max-width: 1399px) {
+
+      #wrapper {
+        max-width: 950px;
+      }
+    }
+
+    @media only screen and (min-width: 1300px) and (max-width: 1399px) {
+      #sidebar {
+        max-width: 300px;
+
+      }
+    }
+
+    @media only screen and (min-width: 1400px) and (max-width: 1477px) {
+
+      #wrapper {
+        max-width: 980px;
+      }
+    }
+
+    @media only screen and (min-width: 1400px) and (max-width: 1477px) {
+      #sidebar {
+        max-width: 320px;
+
+      }
+    }
+
+    @media only screen and (min-width: 1480px) {
+
+      #wrapper {
+        max-width: 1050px;
+      }
+    }
+
+    @media only screen and (min-width: 1480px) {
+      #sidebar {
+        max-width: 330px;
+
+      }
+    }
+
+    @media only screen and (min-width: 1005px) {
+
+      #wrapper {
+        /* max-width: 0%; */
+        padding: 0px;
+        width: 70%;
+        float: left;
+      }
+    }
+
+    @media only screen and (min-width: 300px) and (max-width: 1023px) {
+      #sidebar {
+        /* padding-top: 5px; */
+        padding: 10px;
+      }
+    }
+
+    @media only screen and (min-width: 1100px) {
+      #sidebar {
+        padding-top: 25px;
+        padding-right: 3px;
+        padding-left: 15px;
+        width: 30%;
+        float: right;
+        /* padding: 10px; */
+      }
+    }
+
+    @media only screen and (min-width: 1100px) and (max-width: 1199px) {
+
+      #wrapper {
+        max-width: 800px;
+      }
+    }
+
+    @media only screen and (min-width: 1100px) and (max-width: 1199px) {
+      #sidebar {
+        max-width: 270px;
+
+      }
+    }
+
+    @media only screen and (min-width: 400px) and (max-width: 1090px) {
+      #sidebar {
+        max-width: 330px;
+
+      }
+    }
+
+    @media only screen and (min-width: 250px) {
+      #LinkList1 {
+        border: 0.6px solid green;
+        border-radius: 3px;
+        background-color: rgb(193, 255, 182);
+      }
+    }
+
+    @media only screen and (min-width: 1005px) {
+
+      #wrapper {
+        /* max-width: 0%; */
+        padding: 0px;
+        width: 70%;
+        float: left;
+      }
+    }
+
+    @media only screen and (min-width: 300px) {
+
+      #wrapper {
+        /* max-width: 0%; */
+        padding: 5px;
+      }
+    }
+
+    @media only screen and (min-width: 319px) and (max-width: 700px) {
+
+      #wrapper {
+        width: 98%;
+
+      }
+    }
+
+    /* padding-right: 10px; padding-left: 50px; padding-top:25px */
+    @media only screen and (min-width: 300px) {
+      #wrapper {
+        width: 98%;
+      }
+    }
+
+
+    @media only screen and (min-width: 300px) and (max-width: 1000px) {
+      #sidebar {
+        padding-top: 0px;
+        /* width: 0%; */
+      }
+    }
+
+
+    #wrapper {
+      float: left;
+      /* max-width: 1000px; */
+    }
+
+    *,
+    ::after,
+    ::before {
+      box-sizing: content-box;
+    }
+  </style>
+
+
+</div>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  /* this is for whole timeline set of values i.e, body,line etc... */
+  .timeline {
+    position: relative;
+    margin: 50px auto;
+    /* auto for making it in middle and margin for above spacing*/
+    width: auto;
+    padding: 40px 0;
+    box-sizing: border-box;
+
+  }
+
+  /* this is for line */
+  .timeline:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background: rgb(193, 255, 182);
+  }
+
+  .timeline ul {
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .timeline ul li {
+    list-style: none;
+    position: relative;
+    width: 50%;
+    padding: 20px 40px;
+    box-sizing: border-box;
+  }
+
+  .timeline ul li:nth-child(odd) {
+    float: left;
+    text-align: right;
+    clear: both;
+  }
+
+  .timeline ul li:nth-child(even) {
+    float: right;
+    text-align: left;
+    clear: both;
+
+  }
+
+  .content121 {
+    padding-bottom: 20px;
+  }
+
+  .timeline ul li:nth-child(odd):before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    right: -7px;
+    width: 10px;
+    height: 10px;
+    background: green;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(91, 216, 107, 0.2);
+
+  }
+
+  .timeline ul li:nth-child(even):before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: -3px;
+    width: 10px;
+    height: 10px;
+    background: green;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(91, 216, 107, 0.2);
+
+
+  }
+
+  .timeline ul li h3 {
+    margin: 0;
+    padding-bottom: 20px;
+    font-weight: 550;
+    color: green;
+  }
+
+  .timeline ul li p {
+    margin: 10px 0 0;
+    padding: 0px;
+    padding-bottom: 20px;
+    /* font-weight: 550; */
+    color: black;
+  }
+
+  .timeline ul li .time121 h4 {
+    margin: 0px 0 0;
+    padding: 0px;
+    font-size: 20px;
+  }
+
+  .timeline ul li:nth-child(odd) .time121 {
+    position: absolute;
+    top: 12px;
+    right: -100px;
+    margin: 0;
+    padding: 8px 16px;
+    background-color: rgb(193, 255, 182);
+    color: green;
+    border-radius: 18px;
+    box-shadow: 0 0 0 3px rgba(91, 216, 107, 0.2);
+
+  }
+
+  .timeline ul li:nth-child(even) .time121 {
+    position: absolute;
+    top: 12px;
+    left: -100px;
+    margin: 0;
+    padding: 8px 16px;
+    background-color: rgb(193, 255, 182);
+    color: green;
+    border-radius: 18px;
+    box-shadow: 0 0 0 3px rgba(91, 216, 107, 0.2);
+
+  }
+</style>
+
+{% endblock body %}
+
+
+<!-- <div class="container" style=" margin-bottom: 200px;" id="wrapper">
+  <div class="timeline">
+    <ul>
+      {% for year, allmonth in dic.items %}
+      <li>
+        <div class="content121" id="content{{year}}" >
+          {% for month in allmonth %}
+          <h3 id="{{month}}{{year}}">{{month}}</h3>
+          <p id="p{{month}}{{year}}">
+            
+          </p>
+          {% endfor %}
+        </div>
+        <div class="time121" id="time{{year}}">
+          <h4>{{year}}</h4>
+        </div>
+      </li>
+      {% endfor %}
+
+      <div style="clear: both;"></div>
+    </ul>
+
+  </div>
+</div> -->
+
+<!-- 
+<li>
+  <div class="content121" id="content2015">
+    <h3 id="JAN2015"> JAN</h3>
+    <p id="pJAN2015">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="FEB2015"> FEB</h3>
+    <p id="pFEB2015"> This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="MAR2015"> MAR</h3>
+    <p id="pMAR2015">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="APR2015"> APR</h3>
+    <p id="pAPR2015"> This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="MAY2015"> MAY</h3>
+    <p id="pMAY2015">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="JUN2015"> JUN</h3>
+    <p id="pJUN2015">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="JUL2015"> JUL</h3>
+    <p id="pJUL2015"> This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="AUG2015"> AUG</h3>
+    <p id="pAUG2015">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="SEPT2015"> SEPT</h3>
+    <p id="pSEPT2015">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="OCT2015"> OCT</h3>
+    <p id="pOCT2015">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="nov15"> NOV</h3>
+    <p id="pnov15">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="dec15"> DEC</h3>
+    <p id="pdec15">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+
+  </div>
+  <div class="time121" id="time2015">
+    <h4>2015</h4>
+  </div>
+</li>
+<li>
+  <div class="content121" id="content2016">
+    <h3 id="jan16"> JAN</h3>
+    <p id="pjan16">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="feb16"> FEB</h3>
+    <p id="pfeb16">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="mar16"> MAR</h3>
+    <p id="pmar16"> This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="may16"> MAY</h3>
+    <p id="pmay16">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="aug16"> AUG</h3>
+    <p id="paug16">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="sept16"> SEPT</h3>
+    <p id="psept16">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="oct16"> OCT</h3>
+    <p id="poct16">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+  </div>
+  <div class="time121" id="time2016">
+    <h4>2016</h4>
+  </div>
+</li>
+<li>
+  <div class="content121" id="content2017">
+    <h3 id="feb17"> FEB</h3>
+    <p id="pfeb17">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="apr17"> APR</h3>
+    <p id="papr17">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="may17"> MAY</h3>
+    <p id="pmay17">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="aug17"> AUG</h3>
+    <p id="paug17">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="sept17"> SEPT</h3>
+    <p id="psept17">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="oct17"> OCT</h3>
+    <p id="poct17">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="nov17"> NOV</h3>
+    <p id="pnov17">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+  </div>
+  <div class="time121" id="time2017">
+    <h4>2017</h4>
+  </div>
+</li>
+<li>
+  <div class="content121" id="content2018">
+    <h3 id="jan18"> JAN</h3>
+    <p id="pjan18">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="jun18"> JUNE</h3>
+    <p id="pjun18">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="jul18"> JULY</h3>
+    <p id="pjul18">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+  </div>
+  <div class="time121" id="time2018">
+    <h4>2018</h4>
+  </div>
+</li>
+<li>
+  <div class="content121" id="content2019">
+    <h3 id="mar19"> MAR</h3>
+    <p id="pmar19">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="apr19"> APR</h3>
+    <p id="papr19"> This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="may19"> MAY</h3>
+    <p id="pmay19">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="jul19"> JUL</h3>
+    <p id="pjul19">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="aug19"> AUG</h3>
+    <p id="paug19">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="sept19"> SEPT</h3>
+    <p id="psept19">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="nov19"> NOV</h3>
+    <p id="pnov19">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="dec19"> DEC</h3>
+    <p id="pdec19">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+  </div>
+  <div class="time121" id="time2019">
+    <h4>2019</h4>
+  </div>
+</li>
+<li>
+  <div class="content121" id="content2020">
+    <h3 id="jan20"> JAN</h3>
+    <p id="pjan20">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="mar20"> MAR</h3>
+    <p id="pmar20"> This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="apr20"> APR</h3>
+    <p id="papr20">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="may20"> MAY</h3>
+    <p id="pmay20">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+    <h3 id="jun20"> JUN</h3>
+    <p id="pjun20">This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.This is paragraph of the content which further we
+      are going to establish.
+    </p>
+  </div>
+  <div class="time121" id="time2020">
+    <h4>2020</h4>
+  </div> -->
