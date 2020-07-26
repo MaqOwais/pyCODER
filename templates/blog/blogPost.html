@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} blogPost {% endblock title %}
+{% block title %} BlogPost {% endblock title %}
 
 {% block body %}
 
@@ -18,13 +18,13 @@
              
                 </h2>
                 <div class="widget-content">
-                    <div >
+                    <div id="srch1">
                         <form method="get" style="    margin-left: 0.5rem!important;" action="/search" class="form-inline my-2 my-lg-0 mx-3">
-                        <input class="form-control mr-sm-1" type="search" placeholder="Search Aqaeed Article" aria-label="Search" name="query"
-                            id="query">
+                        <input class="form-control mr-sm-1" type="search" placeholder="Search Article" aria-label="Search" name="query"
+                            id="query" style="width:55%">
                         <button class="btn btn-outline-success my-2 mr-sm-1" type="submit">Search</button>
                         </form>
-                        </div>
+                    </div>
         
                     <ul style="color: green;">
         
@@ -335,6 +335,14 @@
                     </style>
                 </div>
             </div>
+            
+        </div>
+        <div id="srch" style="margin-top: 20px;">
+            <form method="get" style="margin-left: 0.5rem!important;" action="/search" class="form-inline my-2 my-lg-0 mx-3">
+            <input class="form-control mr-sm-1" type="search" placeholder="Search Article" aria-label="Search" name="query"
+                id="query" style="width:62%">
+            <button class="btn btn-outline-success my-2 mr-sm-1" style="margin-left: 3px;" type="submit">Search</button>
+            </form>
         </div>
 
 
@@ -371,7 +379,7 @@
                 <button type="submit" class="btn btn-sm btn-success">Submit</button>
             </form>
             {% else %}
-            <p style="font-style: italic; color: red;">Please login(through JOIN US{on navbar}) to post a comment!
+            <p style="font-style: italic; color: red;">Please login to post a comment!
             </p>
             {% endif %}
 
