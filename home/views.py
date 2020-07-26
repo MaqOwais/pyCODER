@@ -124,7 +124,7 @@ def handleSignup(request):
 
         myuser = User.objects.create_user(usernae, email, pass1 )
         myuser.save()
-        messages.success(request,f'Your pyCODER account is successfully created {request.user}')
+        messages.success(request,f'Your account is successfully created {request.user}')
         return redirect('home')
     else:
         return HttpResponse('404 - Not Found')
