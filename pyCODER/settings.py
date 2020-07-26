@@ -9,33 +9,20 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
- 
+
 import os
 from django.contrib.messages import constants as messages
 
-## MANAGE MEDIA
 
-MEDIA_URL = '/media/'
-
+SECRET_KEY = '-8b!^ei_rw3xys&52q^vahusaky2&os_d0u8e@f$%_s423%d_g'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-GEOIP_PATH = os.path.join(BASE_DIR,'geoip2')
-# GEOIP_PATH = os.path.dirname(__file__)
-# https://github.com/codingforentrepreneurs/Geolocator-2
-# GEOIP_PATH = os.path.dirname(__file__)
-# GEOIP_PATH =os.path.join('geoip2')
-# os.path.join(BASE_DIR,"static"),
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY4sho')
-# SECURITY WARNING: don't run with debug turned on in production!
+# print(SECRET_KEY)
 DEBUG = True
 # DEBUG = False
-ALLOWED_HOSTS = []
+# GEOIP_PATH = os.path.join(BASE_DIR,'geoip2')
 
+ALLOWED_HOSTS = []
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Application definition
 
@@ -61,12 +48,8 @@ INSTALLED_APPS = [
     'geoip2',
     'django_user_agents',
     'tracking_analyzer',
-    
-]
 
-# SEO_FOR_MODELS = [
-#     # ‘<app>.models.<Model>’,
-# ]
+]
 
 SITE_ID = 1
 
@@ -83,13 +66,13 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware',
 
 ]
-
+TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 ROOT_URLCONF = 'pyCODER.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',
+        'DIRS': [TEMPLATE_PATH,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -103,7 +86,7 @@ TEMPLATES = [
         },
     },
 ]
-  
+
 WSGI_APPLICATION = 'pyCODER.wsgi.application'
 
 
@@ -135,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
- 
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -155,7 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = '/home/Maqo/pyCODER/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static"),
 ]
@@ -163,6 +146,12 @@ STATICFILES_DIRS = [
 MESSAGE_TAGS ={
     messages.ERROR : 'danger' ,
 }
+## MANAGE MEDIA
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+GEOIP_PATH = os.path.join(BASE_DIR,'geoip2')
 
 # this is actually is for summernote to get the interface
 X_FRAME_OPTIONS = 'SAMEORIGIN'
