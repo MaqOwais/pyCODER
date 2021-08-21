@@ -46,5 +46,5 @@ sqlparse==0.3.0
 stevedore==1.31.0
 tblib==1.6.0
 ua-parser==0.10.0
-urllib3==1.25.8
+urllib3==1.26.5
 user-agents==2.1
